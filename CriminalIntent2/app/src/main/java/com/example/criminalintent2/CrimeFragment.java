@@ -34,6 +34,11 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private EditText mTitleField;
 
+    /**
+     * 在别的地方调用，得到新的fragment
+     * @param crimeId
+     * @return
+     */
     public static CrimeFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID,crimeId); //id到Bundle在OnCreate里面
@@ -42,11 +47,12 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
 
+    //这个是通过bundle得到数据
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID); //得到ID
 
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID); //得到ID
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 

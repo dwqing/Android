@@ -15,6 +15,9 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * 左右滑动的操作
+ */
 public class CrimePagerActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
@@ -22,6 +25,12 @@ public class CrimePagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID =
             "com.bignerdranch.android.criminalintent.crime_id";
 
+    /**
+     * 在别的activity调用，专挑的改activity的同时，传递数据，并且字段可以私有化EXTRA_CRIME_ID。
+     * @param packageContext
+     * @param crimeId
+     * @return
+     */
     public static Intent newIntent(Context packageContext, UUID crimeId){
         Intent intent = new Intent(packageContext,CrimePagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID,crimeId);
@@ -36,8 +45,9 @@ public class CrimePagerActivity extends AppCompatActivity {
         UUID crimeID = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
         mViewPager = findViewById(R.id.activity_crime_pager_view_pager);
-
+        //此this会和下面的position进行匹配
         mCrimes = CrimeLab.get(this).getCrimes();
+        //fragment的管理器
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @NonNull
@@ -55,6 +65,7 @@ public class CrimePagerActivity extends AppCompatActivity {
 
         for (int i = 0;i<mCrimes.size();i++){
             if(mCrimes.get(i).getId().equals(crimeID)){
+                //setCurrentItem()FragmentManager里面的fragment项目
                 mViewPager.setCurrentItem(i);
                 break;
             }
