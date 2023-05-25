@@ -39,23 +39,26 @@ public class DatePickerFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
         View v = LayoutInflater.from(getActivity())
-                .inflate(R.layout.dialog_date,null);
+                .inflate(R.layout.dialog_date,null);//v里面包含的就是正确的对话框视图
 
         Date date = (Date) getArguments().getSerializable(ARG_DATE);
 
         Calendar calendar = Calendar.getInstance();
+
         calendar.setTime(date);
+
         int year = calendar.get(Calendar.YEAR);
         int mouth = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         mDatePicker = (DatePicker) v.findViewById(R.id.dialog_date_picker);
-        mDatePicker.init(year,mouth,day,null);
+        //将日期数据显示在对话框上面
+        mDatePicker.init(year,mouth,day,null);//时间变化监听器，应该是可以写一个匿名内部类
 
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
-                .setTitle(R.string.date_picker_title)
+                .setTitle(R.string.date_picker_title)//字符串资源
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -9,11 +9,29 @@ public class Crime {
     private UUID mId;
     private String mTitle;
     private Date mDate;
+    private String mSuspect;
+
     private boolean mSolved;
 
     public Crime() {
-        mId = UUID.randomUUID();
+      //  mId = UUID.randomUUID();
+       // mDate = new Date();
+        this(UUID.randomUUID());
+    }
+    public Crime(UUID id){
+        mId = id;
         mDate = new Date();
+    }
+    public String getPhotoFilename(){
+        return "IMG"+getId().toString()+".jpg";
+    }
+
+   public String getSuspect() {
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
     }
 
     public UUID getId() {

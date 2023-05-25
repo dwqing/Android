@@ -42,6 +42,7 @@ public class CrimePagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crime_pager);
 
+        //获得数据
         UUID crimeID = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
         mViewPager = findViewById(R.id.activity_crime_pager_view_pager);
@@ -62,7 +63,7 @@ public class CrimePagerActivity extends AppCompatActivity {
                 return mCrimes.size();
             }
         });
-
+        //从点击的地方开始
         for (int i = 0;i<mCrimes.size();i++){
             if(mCrimes.get(i).getId().equals(crimeID)){
                 //setCurrentItem()FragmentManager里面的fragment项目

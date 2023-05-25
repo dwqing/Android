@@ -28,11 +28,13 @@ import java.util.List;
 public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+    //子标签的状态
     private boolean mSubtitleVisible;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //告诉其他fragment。Menu的实现
         setHasOptionsMenu(true);
     }
     /**
@@ -68,8 +70,9 @@ public class CrimeListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime_list,menu);
+        inflater.inflate(R.menu.fragment_crime_list,menu);//自己定义的资源文件
 
+        //
         MenuItem subtitle = menu.findItem(R.id.show_subtitle);
         if (mSubtitleVisible){
             subtitle.setTitle(R.string.hide_subtitle);
@@ -78,7 +81,7 @@ public class CrimeListFragment extends Fragment {
         }
     }
     /**
-     * 点击后响应
+     * 点击后响应，即点击菜单栏后的选项
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -91,6 +94,7 @@ public class CrimeListFragment extends Fragment {
                         .newIntent(getActivity(),crime.getId());
                 startActivity(intent);
                 return true;
+                //可选菜单项的在menu定义的xml文件里面
             case R.id.show_subtitle:
                 mSubtitleVisible = !mSubtitleVisible;
                 getActivity().invalidateOptionsMenu();
@@ -100,6 +104,7 @@ public class CrimeListFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+    //设置子标签
     private void updateSubtitle(){
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         int crimeCount = crimeLab.getCrimes().size();
@@ -121,7 +126,9 @@ public class CrimeListFragment extends Fragment {
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
-        } else {mAdapter.notifyDataSetChanged();}
+        } else {
+            mAdapter.setCrimes(crimes);
+            mAdapter.notifyDataSetChanged();}
         updateSubtitle();
     }
     /**
@@ -193,6 +200,10 @@ public class CrimeListFragment extends Fragment {
         public int getItemCount() {
             return mCrimes.size();
         }
+        public void setCrimes(List<Crime> crimes){
+            mCrimes = crimes;
+        }
+
     }
 
 
