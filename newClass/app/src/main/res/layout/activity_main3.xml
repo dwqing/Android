@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity3"
+    >
+    <include layout="@layout/mytoolbar"/>
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/draw_layout">
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="内容界面"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ll_taps"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:layout_gravity = "start">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tv_close"
+                android:gravity="center"
+                android:clickable="true"
+                android:text = "侧滑界面，点击收回侧滑"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>
